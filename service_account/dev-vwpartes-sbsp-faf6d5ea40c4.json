@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "dev-vwpartes-sbsp",
+  "private_key_id": "faf6d5ea40c42d4b273638628fd7a7b7619dce00",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCYFAcZIBct2MBJ\nTfQyntKVvjXaGLGyfywnAiK2N842cpOKUVNlohAq6LHK9HOtoiRG5ykrNWh/Zoxi\nTbv70epaQPATpWAi+iYwBmsRad8vJJCLV0aqk/BWt4XlveExfukwV3nP2RbnaHKX\n5Hnj9cBt6jf6yswk6zHjKeXXqoN2xuUmYmVNyCl19Mh/GkHZcjZD6ikEPMjAUZsV\naQUC79SOz7klaRPWsFCpyg0pK9XcdqVZq41xBm6jnEpy4WTqzOJWc/1pNZn62vow\nXXb4O4X3o9KPsqHpeXioHn+tGEXZQh6QqILcX/9tH11h1jmKi6Xx49vHg5FT6vF9\ns5uLJpu3AgMBAAECggEALw6rb5vdcENMpKIpeOxqLwmvcjAH9Dqjt+JSSV4VQgXM\nH5Wwn5c5N33PXgSsMsMkRIhM1eDt19YshFKXY4F96bWEVB/tEoWjAWNLCBVhiR3g\nWC2GYUvrp3mcRg2uO/mQQHQg7i63hp1sMBHzoZUumRRLhB/ycU4RnsAdLdHGYh8J\nCBddcoV5JQ4M+vHPS+DhBQ71b8RiGAJLjoiAw9oIAGGly5wvZIunSWwaDR3SLPxl\nWVNtUvh4hKkHRCgw92w0ub8BgRv04QhomRJt4W6scByshfPwLcml56hxnPpTt9US\nAoltshXU9c4zTgUPQD5LLgSSBP6U2QjpuM7p3BvvqQKBgQDQarhEYYYrfZp6TBlR\nQDTmLMZhFLDCBo6KyUHApbLjka3SZgNfqEQvBK+2DWzfrth2AxVgTeJRz6ZTeCy6\nlP7yiwtNxOvdWhp8Qda9ZFdknxV6EKUHlQQ7VuBzIVEpCJxsldulltWsyUVvS5B6\n+RWZOawiOW0e0qdCbXxFGEav8wKBgQC6zH/1PuHXDn4bPJNCqGlFQodDgHv1Mt7n\no1iMBo1lMv2K1G3O701k9GBFSxZQuB6+EUjFYF6bBwR+7HkKiL1cEgFRh3Y8eGPC\n7YqQLE4YzWBMXpQiUWe5JCuwwJjP25UL2qq59MQW1SVEnvwRY8fvgQQ7Qij0tnBz\nhRr9FXkaLQKBgD08nhe5b+qnZRQ599ZfvytCTKeJpMXdl1Q//gnUpdMnoqMHRkZ8\n8ku+XMJo/2xZu1AxZ758I9tV39D2pm3MCXzKTe/zxDmtl8qarbXIHcV62Jyc92Ba\n8Hte82PgjjA4T324KmllADNckAI7eaAoP6hdwa3soZtE2dAyyyiiEWLxAoGAGxJs\nMQTOAjbte9EJno19xDXiGJxUWrLmrzdzK8f/Uf1T1Xz39RelZc4s7Z32O/iTLASh\nQUm4LEuWETcAS9CJcQCDBGfXcOgZvTRj8oUZRGrvW+IRIfAeUiy10EX5X5Z5QWCN\nganBiXWWkx1fdr25SjKuhFAQU3blUTinMqqcBHkCgYAyFz3vT2oEAgEpt2suEh0V\nSq6wdvmy5j/Xc1NUr3mUpH0rZjXaHR0/O456mH0u0RK4X5I5pqt0kV+xiO46OyO9\ngctL7r044Y4SuImdvcvRZ0LEaX7zr67o6sWz8YQVwcPF4gHlniEw2nA0/LcipccW\ny6lswu9yEmeiBQ6UF+d+ww==\n-----END PRIVATE KEY-----\n",
+  "client_email": "dev-vwpartesadmin@dev-vwpartes-sbsp.iam.gserviceaccount.com",
+  "client_id": "113316715791420792642",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dev-vwpartesadmin%40dev-vwpartes-sbsp.iam.gserviceaccount.com"
+}
