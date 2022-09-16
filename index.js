@@ -3,29 +3,31 @@
 const constructor = require('./create').createIntent
 
 constructor({
-  projectId: 'dev-vwpartes-sbsp',
-  displayName: 'menu.pregunta',
-  inputContextNames: ['menu', 'main'],
+  displayName: 'testParameters2', // Nombre del Intent
+  inputContextNames: ['ask_name', 'main'], // Contextos de entrada
   outputContexts:
-    [
+   [
       {
-        "name": "menu",
+        "name": "ask_name",
         "lifespanCount": 0
       },
       {
         "name": "main",
         "lifespanCount": 5
+      },
+      {
+        "name": "ask_phone",
+        "lifespanCount": 5
       }
-    ],
-  trainingPhrasesParts: ['Hacer pregunta ❓', 'Hacer pregunta', 'Pregunta', 'Asesor', 'opcion 4', '4', 'eleccion 4', 'numero 4', 'cuatro', 'numero cuatro', 'escojo el cuatro'],
-  action: "menu.pregunta",
-  messageTexts: ['En unos instantes uno de nuestros asesores te atenderá para ayudarte con tu consulta. 👨‍💻'],
-  webhookState: "WEBHOOK_STATE_ENABLED",
+    ], // Contextos de salida
+  trainingPhrasesParts: ['Yo soy Leonardo valencia'], // Frases de entrenamiento, Si tiene o no parametros, se define un parametro todo aquel encerrado en {}
+  entity: ["phone","telefono"], // [{nombre del entity}, {nombre que va a tomar el entity}]
+  action: "ask_phone", // ACtion que se va a consultar en base de datos
+  messageTexts: ['Gracias señor'],
   haveFallback: false,
-  fallbackContexts: ['main', 'menu'],
-  fallbackMessage: ['😊 ¿Cómo te gustaría continuar? Selecciona una opción.\n\n1️⃣ Cotizar a domicilio ⚙\n2️⃣ Menú inicial 🔙']
+  fallbackContexts: ['main', 'ask_phone'],
+  fallbackMessage: ['No entiendo su numero']
 });
-
 // trainingPhrasesParts:['mi numero 3011233212','3214564567','mi telefono es 3219877898','3506788765','es 3247892345'],
 // trainingPhrasesParts:['hola', 'oli','buenas','buenas tardes','como vas','buenos dias','buenas noches'],
 // trainingPhrasesParts:['mi nombre es Leonardo Valencia', 'Soy Pepito Perez','Juan Garces','Luisa Morales','Jonatan Ponton','Andres Bermudes','Maria Del Carmen',' Maria Jose Cabal'],

@@ -8,18 +8,30 @@
 // const messageTexts = 'Message texts for the agent's response when the intent is detected, e.g. 'Your reservation has been confirmed';
 
 // service account import
-const serviceAccount = require('./service_account/dev-vwpartes-sbsp-faf6d5ea40c4');
+
+const { resolve } = require('path');
+const { readdir } = require('fs').promises;
+
+const fs = require("fs");
+  
+let directory_name = "service_account";
+  
+// Function to get current filenames
+// in directory
+let filenames = fs.readdirSync(directory_name);
+  
+const  serviceAccount  = require(`./service_account/${filenames[0]}`);
+
 
 // Imports the Dialogflow library
 const dialogflow = require('@google-cloud/dialogflow');
 
 const intentsClient = new dialogflow.IntentsClient({ credentials: serviceAccount });
 
+const service = JSON.parse(fs.readFileSync(`./service_account/${filenames[0]}`, 'utf8'));
 
 
 // ===================================================
-
-
 
 async function createFallback(props) {
 
@@ -74,48 +86,99 @@ async function createFallback(props) {
 }
 
 async function createIntent(props) {
+
+  const projectId = service.project_id
   // Construct request
   // The path to identify the agent that owns the created intent.
-  const agentPath = intentsClient.projectAgentPath(props.projectId);
-
+  const agentPath = intentsClient.projectAgentPath(projectId);
   const trainingPhrases = [];
   inputContextName = []
   outputContext = []
-
+  
   props.inputContextNames.forEach(contextName => {
     const context = `projects/${props.projectId}/agent/sessions/-/contexts/${contextName}`
     inputContextName.push(context)
   })
-
+  
   props.outputContexts.forEach(contextName => {
     const context = {
       name: `projects/${props.projectId}/agent/sessions/-/contexts/${contextName.name}`,
       lifespanCount: contextName.lifespanCount
-
+      
     }
     outputContext.push(context)
   })
-
+  
+  let training = []
   props.trainingPhrasesParts.forEach(trainingPhrasesPart => {
-    const part = {
-      text: trainingPhrasesPart,
-    };
+    const part = []
 
+    if (trainingPhrasesPart.includes('{') && trainingPhrasesPart.includes('}')){
+      let start = trainingPhrasesPart.indexOf('{')
+      let end = trainingPhrasesPart.indexOf('}')
+
+      let entityPhrase = trainingPhrasesPart.split('{')
+
+
+      entityPhrase.forEach(enty => {
+    
+        if (enty.includes('}'))
+        {
+          let temp = enty.split('}')
+          training.push(temp[0])
+          training.push(temp[1])
+        }
+        else {
+          training.push(enty)
+        }
+      })
+
+
+    training.forEach((tra, index) => {
+
+      if (index === 1){
+        const littlePart = {
+          text: tra,
+            "entityType": "@"+props.entity[0],
+            "alias": props.entity[1],
+            "userDefined": true
+        };  
+        part.push(littlePart)
+      }
+      else {
+        const littlePart = {
+          text: tra,
+            "userDefined": false
+        };
+        part.push(littlePart)
+
+      }
+      
+      
+    })
+    }
+    else {
+      const littlePart = {
+        text:trainingPhrasesPart
+      }
+
+      part.push(littlePart)
+    }
+    
     // Here we create a new training phrase for each provided part.
     const trainingPhrase = {
       type: 'EXAMPLE',
-      parts: [part],
+      parts: part,
     };
-
+    
     trainingPhrases.push(trainingPhrase);
   });
   messages = []
-
+  
   props.messageTexts.forEach(message => {
     const messageText = {
       text: [message],
     };
-
     const msg = {
       text: messageText,
     };
@@ -128,13 +191,13 @@ async function createIntent(props) {
     inputContextNames: inputContextName,
     outputContexts: outputContext,
     messages: messages,
-    webhookState: props.webhookState,
+    webhookState: "WEBHOOK_STATE_ENABLED",
   };
   const createIntentRequest = {
     parent: agentPath,
     intent: intent,
   };
-
+  
   if (props.haveFallback) {
     await createFallback({
       projectId: props.projectId,
@@ -157,8 +220,9 @@ async function createIntent(props) {
       fallbackMessage: ['']
     })
   }
-
+  
   // Create the intent
+  console.log('-------')
   const [response] = await intentsClient.createIntent(createIntentRequest);
   console.log(`Intent ${response.name} created`);
 }
