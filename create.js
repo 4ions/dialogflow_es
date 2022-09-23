@@ -82,7 +82,9 @@ async function createFallback(props) {
 
   // Create the intent
   const [response] = await intentsClient.createIntent(createIntentRequest);
-  console.log(`Fallback ${response.name} created`);
+  console.log('-------')
+  console.log(`Fallback ${props.displayName} created`);
+  console.log('-------')
 }
 
 async function createIntent(props) {
@@ -109,9 +111,11 @@ async function createIntent(props) {
     outputContext.push(context)
   })
   
-  let training = []
   props.trainingPhrasesParts.forEach(trainingPhrasesPart => {
     const part = []
+    let training = []
+
+    // =========== Frases de entrenamiento ===============
 
     if (trainingPhrasesPart.includes('{') && trainingPhrasesPart.includes('}')){
       let start = trainingPhrasesPart.indexOf('{')
@@ -164,7 +168,6 @@ async function createIntent(props) {
 
       part.push(littlePart)
     }
-    
     // Here we create a new training phrase for each provided part.
     const trainingPhrase = {
       type: 'EXAMPLE',
@@ -173,6 +176,12 @@ async function createIntent(props) {
     
     trainingPhrases.push(trainingPhrase);
   });
+
+  
+  // ============= fin de frases de entrenamiento
+
+  
+
   messages = []
   
   props.messageTexts.forEach(message => {
@@ -200,7 +209,7 @@ async function createIntent(props) {
   
   if (props.haveFallback) {
     await createFallback({
-      projectId: props.projectId,
+      projectId: projectId,
       displayName: `fallback.${props.displayName}`,
       inputContextNames: props.fallbackContexts,
       outputContexts: [
@@ -222,9 +231,9 @@ async function createIntent(props) {
   }
   
   // Create the intent
-  console.log('-------')
   const [response] = await intentsClient.createIntent(createIntentRequest);
-  console.log(`Intent ${response.name} created`);
+  console.log(`Intent ${props.displayName} created`);
+  console.log('-------')
 }
 
 
